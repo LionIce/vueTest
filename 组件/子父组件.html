@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+
+    <template id="c1">
+        <div>
+            <h2>父{{con}}获取到的子组件的值：{{soncon}}</h2>
+            <son @soncon="clickRes" :con='con'></son>
+        </div>  
+    </template>
+
+    <div id="app">
+        <index></index>
+    </div>
+
+
+    <script>
+
+        Vue.component('index',{
+            template:'#c1',
+            data(){
+                return {con:'组件',soncon:'???'}
+            },
+            methods:{
+                clickRes(data){
+                    this.soncon=data;
+                }
+            },
+            components:{
+                son:{
+                    template:'<button @click="emitRes">子{{con}}要传递的值name:{{name}}</button>',
+                    data(){
+                        return {
+                            name:'son contain'
+                        }
+                    },
+                    props:['con'],
+                    methods:{
+                        emitRes(){
+                            this.$emit('soncon',this.name);
+                        }
+                    }
+                }
+            }
+        })
+
+        var vm=new Vue({
+            el:'#app',
+            data:{}
+        })    
+    </script>
+</body>
+</html>

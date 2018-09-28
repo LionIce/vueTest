@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <father></father>
+    </div>
+
+
+    <script>
+
+
+        var eventbus=new Vue();
+        Vue.component('father',{
+            template:`<div>
+                        <sonF></sonF>
+                        <sonT></sonT>
+                      </div>`,
+            data(){
+                return {}
+            },
+            methods:{},
+
+            components:{
+                sonF:{
+                    template:'<p>接收sonT传递的值为：{{Tcon}}</p>',
+                    data(){
+                        return {
+                            Tcon:'???'
+                        }
+                    },
+                    mounted() {
+                        //通过eventbus的$on()方法监听兄弟节点发射出来的事件
+                        eventbus.$on('tellSonF',data=>{
+                            this.Tcon=data;
+                        })
+                    },
+                },
+                sonT:{
+                    template:'<button @click="emitSonT">我需要向sonF传递的值为：{{sonT}}</button>',
+                    data(){
+                        return {
+                            sonT:'sonF'
+                        }  
+                    },
+                    methods:{
+                        emitSonT(){
+                            eventbus.$emit('tellSonF',this.sonT);
+                        }
+                    }
+                }
+            }
+        })
+
+
+
+        var vm=new Vue({
+            el:'#app',
+            data:{}
+        })    
+    </script>
+</body>
+</html>

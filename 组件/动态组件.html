@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    
+
+    <div id="app">
+        <ul>
+            <li @click='currentCom="index"'><a href="#">首页</a></li>
+            <li @click='currentCom="vegetable"'><a href="#">蔬菜</a></li>
+            <li><a href="#">水果</a></li>
+            <li><a href="#">肉类</a></li>
+        </ul>
+
+        <component :is="currentCom"></component>
+        <!-- <component is="vegetable"></component> -->
+    </div>
+    <script>
+
+        Vue.component('index',{
+            template:`<div>首页</div>`
+        })
+        Vue.component('vegetable',{
+            template:`<div>蔬菜</div>`
+        })
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                currentCom:''
+            },
+            methods:{}
+        })    
+        
+    </script>
+</body>
+</html>

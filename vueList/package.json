@@ -7,5 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "comment": "0.0.2",
+    "cors": "^2.8.4",
+    "jquery": "^3.3.1",
+    "moment": "^2.22.2",
+    "vue": "^2.5.17"
+  }
 }

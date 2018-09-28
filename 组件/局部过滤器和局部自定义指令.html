@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    
+
+    <div id="app">
+        <one></one>
+        <two></two>
+    </div>
+
+
+
+
+    <script>
+        //one局部过滤器
+        Vue.component('one',{
+            data(){
+                return {
+                    time:new Date()
+                }
+            },
+            template:`<div>
+                        <p>{{time | fmtTime}}</p>
+                        <input type='text'>
+                     </div>`,
+            filters: {
+                fmtTime(time) {
+                    var y=time.getFullYear();
+                    var m=time.getMonth()+1;
+                    var d=time.getDate();
+                    return y+"/"+m+"/"+d;
+                    }
+                }
+            }     
+        )
+        //two局部指令
+        Vue.component('two',{
+            data(){
+                return {
+                    time:new Date()
+                }
+            },
+            template:`<div>
+                        <p>{{time}}</p>
+                        <input type='text' v-myfocus>
+                     </div>`,
+            directives:{
+                myfocus:{
+                    inserted(el,binding){
+                        el.focus();
+                    }
+                }
+            }
+        })
+
+
+        var vm=new Vue({
+            el:'#app',
+            data:{},
+            methods:{}
+        })  
+    </script>
+</body>
+</html>

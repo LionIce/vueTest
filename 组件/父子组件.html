@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <template id="c1">
+        <h3>{{con}}<son :con='con'></son></h3>
+    </template>
+    <div id="app">
+        <index></index>
+    </div>
+
+
+    <script>
+
+
+        Vue.component('index',{
+            template:'#c1',
+            data(){
+                return {con:'组件'}
+            },
+            components:{
+                son:{
+                    template:'<p>子{{con}}</p>',
+                    props:['con']
+                }
+            }
+        })
+        var vm=new Vue({
+            el:'#app',
+            data:{}
+        })    
+    </script>
+</body>
+</html>

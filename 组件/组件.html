@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <index></index>
+        <index></index>
+        <index></index>
+    </div>
+
+
+
+    <script>
+        var Index=Vue.extend({
+            template:'<h3 v-on:click="cou+=1">{{cou}}</h3>',
+            data(){
+                return {cou:'hello'}
+            }
+        })
+        Vue.component('index',Index);
+        var vm=new Vue({
+            el:'#app',
+            data:{
+
+            }
+        })
+    </script>
+</body>
+</html>
