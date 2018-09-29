@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.min.js"></script>
+    <script type="text/javascript" src="./node_modules/vue-router/dist/vue-router.min.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <router-link to='/index'>index page</router-link>
+        <router-view></router-view>
+    </div>
+
+
+    <script>
+
+        var index=Vue.component('index',{
+            template:`<div>
+                    index page
+                    <button @click='jumpTo'>indexOne page</button>
+                    <router-view></router-view>
+                </div>`,
+            methods:{
+                jumpTo(){
+                    this.$router.push({name:'indexOne'})
+                },
+            },
+            mounted() {
+                console.log(this.$route);
+            },
+        })
+        var indexOne=Vue.component('indexOne',{
+            template:`<div>
+                    indexOne page
+                </div>`
+        })
+
+        var router=new VueRouter({
+            routes: [
+                {name:'default',path:'*',redirect:'/index'},
+                {name:'index',path:'/index',component:index,
+                    children:[
+                        {name:'indexOne',path:'indexOne',component:indexOne}
+                    ]}
+            ]
+        })
+        var vm=new Vue({
+            el:'#app',
+            data:{},
+            methods:{},
+            router
+        })    
+    </script>
+</body>
+</html>

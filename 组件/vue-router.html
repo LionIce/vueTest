@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+    <script type="text/javascript" src="./node_modules/vue-router/dist/vue-router.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li><router-link to='/index'>首页</router-link></li>
+            <li><router-link to='/one'>第一页</router-link></li>
+            <li><router-link to='/two'>第二页</router-link></li>
+            <li><router-link to='/three'>第三页</router-link></li>
+            <li><router-link to='/four'>第四页</router-link></li>
+            <li><router-link to='/last'>尾页</router-link></li>
+        </ul>
+
+        <router-view></router-view>
+    </div>
+
+
+
+    <script>
+
+        var index=Vue.component('index',{
+            template:`<div>首页数据</div>`
+        })
+        var one=Vue.component('one',{
+            template:`<div>第一页数据</div>`
+        })
+        Vue.component('two',{
+            template:`<div>第二页数据</div>`
+        })
+        Vue.component('three',{
+            template:`<div>第三页数据</div>`
+        })
+        Vue.component('four',{
+            template:`<div>第四页数据</div>`
+        })
+        Vue.component('last',{
+            template:`<div>尾页数据</div>`
+        })
+
+        var router=new VueRouter({
+            routes:[
+                {name:'default',path:'*',redirect:'/index'},
+                {name:'index',path:'/index',component:index},
+                {name:'one',path:'/one',component:one}
+            ]
+        })
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                page:''
+            },
+            methods:{},
+            router
+        })
+    </script>
+</body>
+</html>
